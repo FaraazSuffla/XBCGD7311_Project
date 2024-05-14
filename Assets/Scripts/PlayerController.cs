@@ -19,15 +19,19 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-        Vector3 move = transform.TransformDirection(moveDirection) * moveSpeed * Time.deltaTime;
-
-        // Apply gravity
-        if (!characterController.isGrounded)
+        // Check if there is movement input
+        if (horizontalInput != 0f || verticalInput != 0f)
         {
-            move.y -= gravity * Time.deltaTime;
-        }
+            Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+            Vector3 move = transform.TransformDirection(moveDirection) * moveSpeed * Time.deltaTime;
 
-        characterController.Move(move);
+            // Apply gravity
+            if (!characterController.isGrounded)
+            {
+                move.y -= gravity * Time.deltaTime;
+            }
+
+            characterController.Move(move);
+        }
     }
 }
