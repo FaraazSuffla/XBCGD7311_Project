@@ -12,7 +12,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         CheckInteraction();
 
-        if (Input.GetKeyDown(KeyCode.F) && currentInteractable != null)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && currentInteractable != null)
         {
             currentInteractable.Interact();
         }
