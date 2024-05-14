@@ -3215,7 +3215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
+  outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -3553,7 +3553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cdcb6684f06bd847b962a99ac6fa1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerReach: 5
+  playerReach: 3
 --- !u!114 &1103274732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3567,6 +3567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  gravity: 9.81
 --- !u!1001 &1173597214
 PrefabInstance:
   m_ObjectHideFlags: 0
