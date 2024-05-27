@@ -7,85 +7,93 @@ public class PipeScript : MonoBehaviour
     float[] rotations = { 0, 90, 180, 270 };
 
     public float[] correctRotation;
-    [SerializeField]
     bool isPlaced = false;
-
-    int PossibleRots = 1;
 
     GameManager gameManager;
 
-    private void Awake()
+    void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    private void Start()
+    void Start()
     {
-        PossibleRots = correctRotation.Length;
+        StartCoroutine(InitializePipeRotation());
+    }
 
-        // Shuffle the rotations array
-        for (int i = rotations.Length - 1; i > 0; i--)
-        {
-            int j = Random.Range(0, i + 1);
-            float temp = rotations[i];
-            rotations[i] = rotations[j];
-            rotations[j] = temp;
-        }
+    IEnumerator InitializePipeRotation()
+    {
+        yield return new WaitForSeconds(0.1f); // Delay to ensure rotation animation completes
 
         // Set the pipe to a random rotation that is not correct
+        List<float> nonCorrectRotations = new List<float>();
+
+        // Populate the list with rotations that are not correct
         foreach (float rotation in rotations)
         {
-            if (PossibleRots > 1)
+            bool isCorrect = false;
+            foreach (float correctRot in correctRotation)
             {
-                if (rotation != correctRotation[0] && rotation != correctRotation[1])
+                if (Mathf.Abs(rotation - correctRot) < 1f)
                 {
-                    transform.eulerAngles = new Vector3(0, 0, rotation);
+                    isCorrect = true;
                     break;
                 }
             }
-            else
-            {
-                if (rotation != correctRotation[0])
-                {
-                    transform.eulerAngles = new Vector3(0, 0, rotation);
-                    break;
-                }
-            }
+
+            if (!isCorrect)
+                nonCorrectRotations.Add(rotation);
         }
+
+        // Set the pipe's rotation to a random rotation from the list of non-correct rotations
+        transform.eulerAngles = new Vector3(0, 0, nonCorrectRotations[Random.Range(0, nonCorrectRotations.Count)]);
 
         // Ensure pipe is not initially placed
         isPlaced = false;
     }
 
-    private void OnMouseDown()
+    void OnMouseDown()
     {
+        StartCoroutine(RotatePipe());
+    }
+
+    IEnumerator RotatePipe()
+    {
+        yield return new WaitForSeconds(0.1f); // Delay to ensure rotation animation completes
+
+        // Rotate the pipe
         transform.Rotate(new Vector3(0, 0, 90));
 
-        if (PossibleRots > 1)
+        // Check if the current rotation is correct
+        bool isCorrect = IsCorrectRotation();
+
+        // If the pipe was not placed and is now in correct rotation, count it as placed
+        if (!isPlaced && isCorrect)
         {
-            if ((transform.eulerAngles.z == correctRotation[0] || transform.eulerAngles.z == correctRotation[1]) && !isPlaced)
-            {
-                isPlaced = true;
-                gameManager.correctMove();
-            }
-            else if (isPlaced)
-            {
-                isPlaced = false;
-                gameManager.wrongMove();
-            }
+            isPlaced = true;
+            gameManager.correctMove();
+            Debug.Log("Pipe placed correctly.");
         }
-        else
+        // If the pipe was placed and is not in correct rotation anymore, count it as unplaced
+        else if (isPlaced && !isCorrect)
         {
-            if (transform.eulerAngles.z == correctRotation[0] && !isPlaced)
-            {
-                isPlaced = true;
-                gameManager.correctMove();
-            }
-            else if (isPlaced)
-            {
-                isPlaced = false;
-                gameManager.wrongMove();
-            }
+            isPlaced = false;
+            gameManager.wrongMove();
+            Debug.Log("Pipe removed from correct position.");
         }
+    }
+
+    bool IsCorrectRotation()
+    {
+        float currentRotation = transform.eulerAngles.z;
+
+        foreach (float correctRot in correctRotation)
+        {
+            // Check if the difference between current rotation and correct rotation is within a small threshold
+            if (Mathf.Abs(currentRotation - correctRot) < 1f)
+                return true;
+        }
+
+        return false;
     }
 }
