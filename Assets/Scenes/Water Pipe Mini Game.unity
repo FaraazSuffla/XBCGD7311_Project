@@ -482,7 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctRotation:
   - 0
-  isPlaced: 0
+  isPlaced: 1
 --- !u!1 &583283684
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,7 +708,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 795220556}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.97732973, y: 3.681804, z: 12.127432}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1001,7 +1001,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202456701}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.70710707, w: 0.70710653}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 3.7873292, y: 0.8518038, z: 12.127432}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1066,8 +1066,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   correctRotation:
-  - 270
   - 90
+  - -90
   isPlaced: 1
 --- !u!1 &1297678879
 GameObject:
@@ -1349,6 +1349,7 @@ MonoBehaviour:
   PipesHolder: {fileID: 1778701310}
   Pipes: []
   totalPipes: 0
+  correctedPipes: 0
 --- !u!4 &1565543254
 Transform:
   m_ObjectHideFlags: 0
