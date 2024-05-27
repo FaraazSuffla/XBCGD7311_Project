@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
     public GameObject PipesHolder;
     public GameObject[] Pipes;
 
@@ -13,6 +12,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Set cursor to default state (visible and unlocked)
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         totalPipes = PipesHolder.transform.childCount;
 
         Pipes = new GameObject[totalPipes];
