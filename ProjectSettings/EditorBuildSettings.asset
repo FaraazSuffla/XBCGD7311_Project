@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Water Pipe Mini Game.unity
     guid: 48ece20aa3be8594387739715f166a39
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: a6bdbfd88e5abda4184ee9cf9ef71fd2
   m_configObjects: {}
