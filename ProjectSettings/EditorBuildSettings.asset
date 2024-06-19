@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: ed871779ff9e1184cad959344252dde2
+  - enabled: 1
+    path: Assets/Scenes/Water Pipe Mini Game.unity
+    guid: 48ece20aa3be8594387739715f166a39
   m_configObjects: {}
